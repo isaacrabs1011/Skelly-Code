@@ -8,6 +8,7 @@
 # Change 3: Moves Left
 # Change 4: Play again
 # Change 5: Leaderboard
+# Change 6: Fixed the scoring bug
 
 import re
 import random
@@ -69,7 +70,14 @@ def PlayGame(Targets, NumbersAllowed, TrainingGame, MaxTarget, MaxNumber):  # Ad
                 if IsTarget:
                     NumbersAllowed = RemoveNumbersUsed(UserInput, MaxNumber, NumbersAllowed)
                     NumbersAllowed = FillNumbers(NumbersAllowed, TrainingGame, MaxNumber)
-        Score -= 1
+                else:  # Fixing the scoring bug.
+                    Score -= 1
+            else:
+                Score -= 1
+        else:
+            Score -= 1
+        ##
+
         if Targets[0] != -1:
             GameOver = True
         else:
@@ -127,12 +135,15 @@ def leaderboard(Score):  # Leaderboard
 def CheckIfUserInputEvaluationIsATarget(Targets, UserInputInRPN, Score):
     UserInputEvaluation = EvaluateRPN(UserInputInRPN)
     UserInputEvaluationIsATarget = False
+    matches = 0
     if UserInputEvaluation != -1:
         for Count in range(0, len(Targets)):
             if Targets[Count] == UserInputEvaluation:
-                Score += 2
+                matches += 1
                 Targets[Count] = -1
                 UserInputEvaluationIsATarget = True
+
+    Score += matches
     return UserInputEvaluationIsATarget, Score
 
 
