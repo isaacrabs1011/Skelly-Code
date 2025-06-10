@@ -250,6 +250,9 @@ def ConvertToRPN(UserInput):  # Reverse Polish Notation
     UserInputInRPN = []
     UserInputInRPN.append(str(Operand))
     Operators.append(UserInput[Position - 1])
+
+
+
     while Position < len(UserInput):
         Operand, Position = GetNumberFromUserInput(UserInput, Position)
         UserInputInRPN.append(str(Operand))
@@ -298,7 +301,7 @@ def EvaluateRPN(UserInputInRPN):
         return -1
 
 
-def GetNumberFromUserInput(UserInput, Position):
+def GetNumberFromUserInput(UserInput, Position):  # Useful for brackets
     Number = ""
     MoreDigits = True
     while MoreDigits:
