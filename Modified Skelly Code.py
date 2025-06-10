@@ -251,25 +251,25 @@ def ConvertToRPN(UserInput):  # Reverse Polish Notation
     UserInputInRPN.append(str(Operand))
     Operators.append(UserInput[Position - 1])
 
+    if Operand != -1:
 
-
-    while Position < len(UserInput):
-        Operand, Position = GetNumberFromUserInput(UserInput, Position)
-        UserInputInRPN.append(str(Operand))
-        if Position < len(UserInput):
-            CurrentOperator = UserInput[Position - 1]
-            while len(Operators) > 0 and Precedence[Operators[-1]] > Precedence[CurrentOperator]:
-                UserInputInRPN.append(Operators[-1])
-                Operators.pop()
-            if len(Operators) > 0 and Precedence[Operators[-1]] == Precedence[CurrentOperator]:
-                UserInputInRPN.append(Operators[-1])
-                Operators.pop()
-            Operators.append(CurrentOperator)
-        else:
-            while len(Operators) > 0:
-                UserInputInRPN.append(Operators[-1])
-                Operators.pop()
-    return UserInputInRPN
+        while Position < len(UserInput):
+            Operand, Position = GetNumberFromUserInput(UserInput, Position)
+            UserInputInRPN.append(str(Operand))
+            if Position < len(UserInput):
+                CurrentOperator = UserInput[Position - 1]
+                while len(Operators) > 0 and Precedence[Operators[-1]] > Precedence[CurrentOperator]:
+                    UserInputInRPN.append(Operators[-1])
+                    Operators.pop()
+                if len(Operators) > 0 and Precedence[Operators[-1]] == Precedence[CurrentOperator]:
+                    UserInputInRPN.append(Operators[-1])
+                    Operators.pop()
+                Operators.append(CurrentOperator)
+            else:
+                while len(Operators) > 0:
+                    UserInputInRPN.append(Operators[-1])
+                    Operators.pop()
+        return UserInputInRPN
 
 
 def EvaluateRPN(UserInputInRPN):
